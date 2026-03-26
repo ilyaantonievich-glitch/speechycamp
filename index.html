@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Летний лагерь Speechy School - Космическая лаборатория</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        /* Lenis smooth scroll basic styles */
+        html.lenis { height: auto; }
+        .lenis.lenis-smooth { scroll-behavior: auto; }
+        .lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+        .lenis.lenis-stopped { overflow: hidden; }
+        .lenis.lenis-scrolling iframe { pointer-events: none; }
+
+        :root {
+            --bg-main: #fdf8f1;
+            --bg-white: #ffffff;
+            --text-main: #2b2723; /* Сделал текст чуть темнее для контраста */
+            --text-white: #ffffff;
+            --text-muted: #736b63;
+            
+            --accent-orange: #f78a61;
+            --accent-orange-hover: #e8764a;
+            --accent-orange-light: #fdeae2;
+            
+            --btn-green: #7ab861;
+            --btn-green-hover: #67a150;
+            --btn-green-light: #eaf4e6;
+            
+            --border-radius-card: 24px;
+            --border-radius-btn: 3000px;
+        }
+
+        body {
+            font-family: 'Montserrat', 'TildaSans', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: var(--text-main);
+            background-color: var(--bg-main);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        /* --- Утилиты --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+        }
+
+        .section-divider {
+            width: 300px;
+            height: 3px;
+            background-color: var(--accent-orange);
+            margin: 0 auto;
+            opacity: 0.3;
+            border-radius: 5px;
+        }
+        
+        .section-padding {
+            padding: 100px 0;
+        }
+
+        h1, h2, h3, h4 {
+            color: var(--text-main);
+            font-weight: 800;
+            margin-top: 0;
+        }
+
+        .kicker {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 2.5px;
+            color: var(--accent-orange);
+            font-weight: 800;
+            margin-bottom: 20px;
+            display: inline-block;
+            background: var(--accent-orange-light);
+            padding: 6px 16px;
+            border-radius: 20px;
+        }
+
+        /* --- Header --- */
+        header {
+            background-color: rgba(253, 248, 241, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+        }
+
+        .header-logo {
+            max-width: 140px;
+        }
+
+        .header-contacts {
+            font-weight: 600;
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .contact-address {
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        /* Кнопки */
+        .btn {
+            background-color: var(--btn-green);
+            color: var(--text-white);
+            text-decoration: none;
+            padding: 18px 36px;
+            border-radius: var(--border-radius-btn);
+            font-weight: 700;
+            font-size: 16px;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            display: inline-block;
+            text-align: center;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: var(--btn-green-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(103, 161, 80, 0.2);
+        }
+
+        .btn-orange {
+            background-color: var(--accent-orange);
+            color: var(--text-white);
+        }
+
+        .btn-orange:hover {
+            background-color: var(--accent-orange-hover);
+            box-shadow: 0 10px 20px rgba(240, 106, 53, 0.25);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--text-white);
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(5px);
+        }
+        
+        .btn-outline:hover {
+            border-color: var(--text-white);
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--text-white);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            border-radius: 40px;
+            margin: 20px 20px 60px;
+            position: relative;
+            overflow: hidden;
+            /* Прямые ссылки на unsplash чтобы точно работали */
+            background-image: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1920&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* Эффект параллакса */
+            color: var(--text-white);
+            display: flex;
+            align-items: center;
+            min-height: 80vh;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(135deg, rgba(43, 39, 35, 0.85) 0%, rgba(43, 39, 35, 0.4) 100%);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            padding: 60px;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .hero .kicker {
+            background: rgba(122, 184, 97, 0.2);
+            color: #a7e08f;
+            border: 1px solid rgba(122, 184, 97, 0.3);
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 900;
+            margin-bottom: 25px;
+            line-height: 1.05;
+            color: var(--text-white);
+            letter-spacing: -1px;
+        }
+
+        .hero h1 span {
+            color: var(--accent-orange);
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            font-weight: 500;
+            margin: 0 auto 40px;
+            color: rgba(255, 255, 255, 0.9);
+            max-width: 650px;
+        }
+
+        .hero-tags {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 50px;
+        }
+
+        .tag {
+            padding: 10px 24px;
+            border-radius: 3000px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            color: var(--text-white);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        /* --- Image Text Block --- */
+        .image-text-block {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+            background-color: var(--bg-white);
+            border-radius: 40px;
+            padding: 50px;
+            box-shadow: 0 20px 60px rgba(71, 65, 59, 0.04);
+            margin-bottom: 100px;
+            position: relative;
+        }
+
+        .image-text-block::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            width: 100px;
+            height: 100px;
+            background-image: radial-gradient(var(--accent-orange) 2px, transparent 2px);
+            background-size: 15px 15px;
+            opacity: 0.2;
+            z-index: -1;
+            border-radius: 50%;
+        }
+
+        .image-text-content {
+            flex: 1;
+        }
+
+        .image-text-image {
+            flex: 1;
+            border-radius: 24px;
+            overflow: hidden;
+            height: 400px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.08);
+            position: relative;
+        }
+
+        .image-text-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .image-text-image:hover img {
+            transform: scale(1.05);
+        }
+
+        .image-text-block h2 {
+            font-size: 2.5rem;
+            margin-bottom: 25px;
+            line-height: 1.2;
+        }
+
+        .image-text-block p {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+        }
+
+        /* --- Description Section (Main Idea) --- */
+        .general-description {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 80px;
+        }
+        
+        .general-description h2 {
+            font-size: 2.8rem;
+            margin-bottom: 25px;
+        }
+        
+        .general-description p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+        }
+
+        /* --- Features Section --- */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-bottom: 100px;
+        }
+
+        .feature-card {
+            background: var(--bg-white);
+            padding: 50px 40px;
+            border-radius: 30px;
+            box-shadow: 0 10px 40px rgba(71, 65, 59, 0.03);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(0,0,0,0.02);
+        }
+
+        .feature-card::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 4px;
+            background: var(--accent-orange);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+            transform-origin: left;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(71, 65, 59, 0.08);
+        }
+        
+        .feature-card:hover::after {
+            transform: scaleX(1);
+        }
+
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background-color: var(--accent-orange-light);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 25px;
+            color: var(--accent-orange);
+            transform: rotate(-5deg);
+            transition: transform 0.3s ease;
+        }
+        
+        .feature-card:hover .feature-icon {
+            transform: rotate(0deg) scale(1.1);
+        }
+
+        .feature-card h4 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+        }
+
+        .feature-card p {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            margin: 0;
+        }
+
+        /* --- Program/Schedule Section --- */
+        .schedule-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .schedule-header h2 {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+        }
+
+        .schedule-container {
+            display: flex;
+            gap: 50px;
+            background: var(--bg-white);
+            border-radius: 40px;
+            padding: 60px;
+            box-shadow: 0 20px 60px rgba(71, 65, 59, 0.04);
+        }
+
+        .schedule-image {
+            flex: 1;
+            border-radius: 24px;
+            overflow: hidden;
+            position: sticky;
+            top: 100px;
+            height: 600px;
+        }
+        
+        .schedule-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .schedule-timeline {
+            flex: 1;
+            padding: 20px 0;
+        }
+
+        .time-block {
+            margin-bottom: 40px;
+            padding-left: 30px;
+            border-left: 2px solid #f0e5d6;
+            position: relative;
+        }
+
+        .time-block::before {
+            content: '';
+            position: absolute;
+            left: -8px;
+            top: 6px;
+            width: 14px;
+            height: 14px;
+            background-color: var(--bg-white);
+            border: 3px solid var(--accent-orange);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .time-block:hover::before {
+            background-color: var(--accent-orange);
+            box-shadow: 0 0 0 5px var(--accent-orange-light);
+        }
+
+        .time {
+            font-weight: 800;
+            color: var(--accent-orange);
+            font-size: 1.1rem;
+            display: block;
+            margin-bottom: 8px;
+            letter-spacing: 0.5px;
+        }
+        
+        .time-block h4 {
+            font-size: 1.3rem;
+            margin-bottom: 8px;
+            color: var(--text-main);
+        }
+
+        .time-block p {
+            color: var(--text-muted);
+            margin: 0;
+            font-size: 1.05rem;
+        }
+
+        .time-block.meal {
+            padding: 20px 30px;
+            background: var(--btn-green-light);
+            border-radius: 0 20px 20px 0;
+            border-left-color: var(--btn-green);
+            margin-left: -2px;
+        }
+        
+        .time-block.meal::before { border-color: var(--btn-green); left: -6px; }
+        .time-block.meal .time { color: var(--btn-green); }
+
+
+        /* --- Prices Section --- */
+        .prices-section {
+            padding: 80px 20px;
+            margin: 60px auto;
+            max-width: 1000px;
+        }
+
+        .prices-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .prices-header h2 {
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+        }
+
+        .prices-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin-bottom: 40px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .price-card {
+            background: var(--bg-white);
+            border-radius: 30px;
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(71, 65, 59, 0.04);
+            border: 1px solid rgba(71, 65, 59, 0.05);
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+
+        .price-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 50px rgba(71, 65, 59, 0.08);
+        }
+
+        .price-card.popular {
+            border-color: var(--accent-orange);
+            background: var(--bg-white);
+        }
+
+        .price-card.popular::before {
+            content: 'Выгодно';
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--accent-orange);
+            color: white;
+            padding: 5px 20px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .price-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            margin-bottom: 15px;
+        }
+
+        .price-amount {
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--text-main);
+            margin-bottom: 5px;
+            line-height: 1;
+        }
+
+        .price-currency {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+
+        .price-save {
+            color: var(--btn-green);
+            font-weight: 700;
+            font-size: 0.95rem;
+            margin-top: 10px;
+            min-height: 24px;
+        }
+
+        .discounts-block {
+            background: #fdf8f1;
+            border-radius: 30px;
+            padding: 40px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            border: 1px dashed rgba(247, 138, 97, 0.4);
+        }
+
+        .discount-col h4 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .discount-col ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .discount-col li {
+            margin-bottom: 12px;
+            font-weight: 500;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+        
+        .discount-value {
+            background: var(--btn-green-light);
+            color: var(--btn-green-hover);
+            padding: 2px 8px;
+            border-radius: 8px;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .prepayment-note {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+
+        @media (max-width: 768px) {
+            .discounts-block { grid-template-columns: 1fr; gap: 30px; padding: 30px 20px; }
+            .prices-header h2 { font-size: 2.2rem; }
+            .prices-grid { grid-template-columns: 1fr; }
+        }
+        .included-section {
+            background-color: #f8fcf6; /* Очень легкий зеленый */
+            border-radius: 40px;
+            padding: 80px 60px;
+            margin-top: 80px;
+            border: 1px solid #eef6ea;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Паттерн на фоне */
+        .included-section::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%237ab861' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            z-index: 0;
+        }
+
+        .included-header {
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            margin-bottom: 50px;
+        }
+
+        .included-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px 40px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .included-list li {
+            position: relative;
+            padding-left: 45px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            background: var(--bg-white);
+            padding: 25px 30px 25px 70px;
+            border-radius: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.02);
+            display: flex;
+            align-items: center;
+        }
+
+        .included-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 25px;
+            width: 30px;
+            height: 30px;
+            background: var(--btn-green);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        /* --- CTA --- */
+        .cta-section {
+            background: var(--text-main);
+            color: white;
+            border-radius: 40px;
+            text-align: center;
+            padding: 80px 40px;
+            margin: 100px 20px 40px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-section::after {
+            content: '';
+            position: absolute;
+            right: -10%;
+            top: -20%;
+            width: 400px;
+            height: 400px;
+            background: var(--accent-orange);
+            filter: blur(100px);
+            opacity: 0.2;
+            border-radius: 50%;
+        }
+
+        .cta-section h2 {
+            color: white;
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* --- Footer --- */
+        footer {
+            background-color: transparent;
+            padding: 40px;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            border-top: 1px solid rgba(71, 65, 59, 0.08);
+            margin-top: 40px;
+        }
+
+        @media (max-width: 992px) {
+            .features { grid-template-columns: repeat(2, 1fr); }
+            .schedule-container { flex-direction: column; }
+            .schedule-image { height: 300px; position: static; }
+        }
+
+        @media (max-width: 768px) {
+            header { justify-content: center; flex-direction: column; gap: 15px; text-align: center; }
+            .header-contacts { flex-direction: column; gap: 10px; }
+            
+            .hero { margin: 0; border-radius: 0; min-height: 70vh; }
+            .hero-content { padding: 40px 20px; }
+            .hero h1 { font-size: 2.5rem; }
+            
+            .image-text-block { flex-direction: column; padding: 30px; }
+            .image-text-image { height: 250px; width: 100%; }
+            
+            .features { grid-template-columns: 1fr; }
+            
+            .schedule-container { padding: 30px 20px; }
+            
+            .included-section { padding: 40px 20px; }
+            .included-list { grid-template-columns: 1fr; }
+            
+            .cta-section { margin: 60px 0 0; border-radius: 0; padding: 60px 20px; }
+            .cta-section h2 { font-size: 2.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="header-logo">
+        <!-- Если логотип не загрузится, будет текст -->
+        <img src="logo.svg" alt="Speechy School" style="width: 100%; height: auto;" onerror="this.outerHTML='<h2 style=\'margin:0;color:var(--btn-green)\'>Speechy.</h2>'">
+    </div>
+    <div class="header-contacts">
+        <span class="contact-address">г. Екатеринбург, ул. Данилина, 10</span>
+        <a href="tel:+79193950988" class="btn">+7 919 39 50 988</a>
+    </div>
+</header>
+
+<div class="hero">
+    <div class="hero-content">
+        <span class="kicker">Открыт набор на лето 2026</span>
+        <h1>Космическая лаборатория:<br><span>код личности</span></h1>
+        <p>Увлекательное путешествие в мир астрологии, психологии и английского языка. Поможем ребенку раскрыть свой потенциал и понять эмоции.</p>
+        
+        <div class="hero-tags">
+            <span class="tag">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent-orange)" stroke-width="2.5"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                10 дней погружения
+            </span>
+            <span class="tag">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--accent-orange)" stroke-width="2.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+                Дети 6-12 лет
+            </span>
+        </div>
+
+        <a href="#schedule" class="btn btn-orange" style="padding: 20px 45px; font-size: 18px;">Изучить программу</a>
+    </div>
+</div>
+
+<div class="section-divider"></div>
+
+<div class="container section-padding">
+    <div class="general-description">
+        <span class="kicker">Концепция смены</span>
+        <h2>Откройте вселенную внутри себя</h2>
+        <p>Наша смена «Космическая лаборатория» — это не просто изучение планет. Это глубокое погружение в себя через призму космоса. Каждый ребенок уникален, как и каждая планета в нашей системе. Мы будем исследовать стихии, характеры и эмоции, используя английский язык как инструмент для общения и самовыражения.</p>
+    </div>
+
+    <div class="image-text-block">
+        <div class="image-text-image">
+            <img src="images/camp-photo-1.jpg" alt="Дети в лагере Speechy">
+        </div>
+        <div class="image-text-content">
+            <span class="kicker">Подход Speechy</span>
+            <h2>Увлекательно и с пользой</h2>
+            <p>Мы превращаем скучные уроки в увлекательный процесс с помощью тщательно отобранных и эффективных методик. На смене ребята не будут сидеть за партами — мы будем играть, творить, общаться и постоянно практиковать разговорный английский.</p>
+            <p>В первой половине дня мы погружаемся в лексику и исследования, а во второй — закрепляем знания на прогулках и через топовые настольные игры.</p>
+        </div>
+    </div>
+
+    <div class="features">
+    <div class="feature-card">
+        <div class="feature-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"></path></svg>
+        </div>
+        <h4>Английский без учебников</h4>
+        <p>Только живая речь, игры, диалоги, песни, скороговорки. Каждый день — фразы для повседневного общения.</p>
+    </div>
+    <div class="feature-card">
+        <div class="feature-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M8 14s1.5 2 4 2 4-2 4-2"></path><line x1="9" y1="9" x2="9.01" y2="9"></line><line x1="15" y1="9" x2="15.01" y2="9"></line></svg>
+        </div>
+        <h4>Эмоциональный интеллект</h4>
+        <p>Учимся понимать свои эмоции и эмоции других. Прокачиваем уверенность через ораторское мастерство и актёрские игры.</p>
+    </div>
+    <div class="feature-card">
+        <div class="feature-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+        </div>
+        <h4>Ежедневные выезды</h4>
+        <p>Экскурсии в музеях, парки с животными, площадки для активных игр и тематические фестивали.</p>
+    </div>
+    </div>
+</div>
+
+<div class="section-divider"></div>
+
+    <div class="container section-padding" id="schedule" style="padding-top: 0; margin-top: 100px;">
+        <div class="schedule-header">
+            <span class="kicker">Распорядок</span>
+            <h2>Как проходит наш день</h2>
+            <p style="color: var(--text-muted); max-width: 600px; margin: 0 auto; font-size: 1.1rem;">Структура сохраняется на протяжении всей смены, но каждый новый день посвящен уникальной теме, связанной с космосом и самопознанием.</p>
+        </div>
+    
+    <div class="schedule-container">
+        <div class="schedule-image">
+            <img src="images/camp-photo-2.jpg" alt="Активности в лагере">
+        </div>
+        <div class="schedule-timeline">
+            <div class="time-block">
+                <span class="time">09:00 – 09:15</span>
+                <h4>Hello time</h4>
+                <p>Бодрое начало дня с движениями и командами.</p>
+            </div>
+            <div class="time-block">
+                <span class="time">09:15 – 10:30</span>
+                <h4>Воркшоп дня</h4>
+                <p>Практическое занятие по одной из граней эмоционального интеллекта с красочными презентациями, дневником и необычными заданиями. Ораторское мастерство с приглашенным экспертом в игровом формате.</p>
+            </div>
+            <div class="time-block meal">
+                <span class="time">10:30 – 11:00</span>
+                <h4>Breakfast</h4>
+            </div>
+            <div class="time-block">
+                <span class="time">11:00 – 12:00</span>
+                <h4>English Time</h4>
+                <p>Живой, разговорный урок с играми и диалогами.</p>
+            </div>
+            <div class="time-block">
+                <span class="time">12:00 – 13:00</span>
+                <h4>Свободное время + йога</h4>
+                <p>Учимся чувствовать свое тело и управлять эмоциями с забавными динозаврами.</p>
+            </div>
+            <div class="time-block meal">
+                <span class="time">13:00 – 13:30</span>
+                <h4>Lunch</h4>
+                <p>Сбалансированное горячее блюдо, каждый день - новое меню.</p>
+            </div>
+            <div class="time-block">
+                <span class="time">13:30 – 15:30</span>
+                <h4>Выезд / прогулка</h4>
+                <p>Парк, музей, активные игры на свежем воздухе.</p>
+            </div>
+            <div class="time-block meal">
+                <span class="time">15:30 – 16:00</span>
+                <h4>Возвращение + полдник</h4>
+            </div>
+            <div class="time-block">
+                <span class="time">16:00 – 17:00</span>
+                <h4>Игротека</h4>
+                <p>Настольные игры и спокойные активности.</p>
+            </div>
+            <div class="time-block" style="margin-bottom: 0;">
+                <span class="time">17:00 – 17:30</span>
+                <h4>Relax time</h4>
+                <p>Программа заканчивается в 17:00, но герой может остаться еще на полчаса, рисуя и играя.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="included-section">
+        <div class="included-header">
+            <span class="kicker">Все продумано</span>
+            <h2 style="font-size: 2.5rem;">Бонусы кэмпа</h2>
+        </div>
+        <ul class="included-list">
+            <li>Фото и видео каждый день — вы будете в курсе, чем живёт ваш ребёнок</li>
+            <li>Нет времени сидеть в телефоне — программа насыщена активностями</li>
+            <li>Среда единомышленников — мы создаем атмосферу, где каждого видят и принимают</li>
+            <li>Дневник эмоционального интеллекта — книжка с рисунками и фразами, которую ребенок заберет домой</li>
+            <li>Навыки общения — учимся управлять дыханием, говорить о себе без стеснения и использовать жесты</li>
+            <li>Ораторское искусство с приглашённым педагогом</li>
+        </ul>
+        <div class="included-action" style="text-align: center; margin-top: 40px;">
+            <a href="#prices" class="btn btn-green">Узнать стоимость</a>
+        </div>
+    </div>
+</div>
+
+<div class="section-divider"></div>
+
+<div class="container section-padding" id="prices" style="padding-top: 0; margin-top: 100px;">
+    <div class="prices-section">
+        <div class="prices-header">
+            <span class="kicker">Инвестиция в будущее</span>
+            <h2>Стоимость смены</h2>
+        </div>
+
+        <div class="prices-grid">
+            <div class="price-card">
+                <div class="price-title">1 смена</div>
+                <div class="price-amount">13 900</div>
+                <div class="price-currency">рублей</div>
+                <div class="price-save"></div>
+            </div>
+            <div class="price-card popular">
+                <div class="price-title">2 смены</div>
+                <div class="price-amount">22 900</div>
+                <div class="price-currency">рублей</div>
+                <div class="price-save">Экономия 4 900 руб</div>
+            </div>
+        </div>
+
+        <div class="discounts-block">
+            <div class="discount-col">
+                <h4>Скидка семьям</h4>
+                <ul>
+                    <li><span class="discount-value">-500 ₽</span> <span>если два ребенка из одной семьи</span></li>
+                    <li><span class="discount-value">-1000 ₽</span> <span>если три ребенка из одной семьи</span></li>
+                </ul>
+            </div>
+            <div class="discount-col">
+                <h4>Скидка тебе и другу</h4>
+                <ul>
+                    <li><span class="discount-value">-500 ₽</span> <span>за каждого приведенного друга</span></li>
+                    <li><span class="discount-value">-1000 ₽</span> <span>при покупке от двух смен</span></li>
+                </ul>
+            </div>
+        </div>
+        
+        <p class="prepayment-note">Бронирование места производится по предварительной оплате 50%</p>
+    </div>
+</div>
+
+<div class="section-divider"></div>
+
+<div class="cta-section" id="contacts">
+    <h2>Забронируйте место<br>в лаборатории</h2>
+    <p>Оставьте заявку прямо сейчас. Количество мест в смене строго ограничено, чтобы мы могли уделить внимание каждому ребенку.</p>
+    
+    <div style="background: var(--bg-white); border-radius: 30px; padding: 40px; max-width: 600px; margin: 0 auto;">
+        <h3 style="color: var(--text-main); margin-bottom: 30px; font-size: 1.8rem;">Свяжитесь с нами</h3>
+        <div style="display: flex; gap: 20px; justify-content: center; flex-direction: column;">
+            <a href="https://wa.me/79193950988" target="_blank" class="btn btn-orange" style="padding: 20px 40px; font-size: 1.2rem; width: 100%; box-sizing: border-box;">
+                Написать в WhatsApp
+            </a>
+            <a href="tel:+79193950988" class="btn" style="background-color: var(--text-main); color: white; padding: 20px 40px; font-size: 1.2rem; width: 100%; box-sizing: border-box;">
+                Позвонить: +7 919 39 50 988
+            </a>
+        </div>
+        <p style="color: var(--text-muted); margin-top: 20px; font-size: 0.95rem; margin-bottom: 0;">Мы ответим на все вопросы и поможем оформить бронь</p>
+    </div>
+</div>
+
+<footer>
+    <p>© 2026 Студия английского языка Speechy School. Все права защищены.</p>
+    <p>г. Екатеринбург, ул. Данилина, 10</p>
+</footer>
+
+<script src="https://unpkg.com/@studio-freight/lenis@1.0.39/dist/lenis.min.js"></script>
+<script>
+    const lenis = new Lenis({
+        duration: 1.2,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        direction: 'vertical',
+        smooth: true,
+    });
+
+    function raf(time) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            lenis.scrollTo(this.getAttribute('href'));
+        });
+    });
+</script>
+
+</body>
+</html>
