@@ -171,11 +171,10 @@
             margin: 20px 20px 60px;
             position: relative;
             overflow: hidden;
-            /* Прямые ссылки на unsplash чтобы точно работали */
             background-image: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1920&auto=format&fit=crop');
             background-size: cover;
             background-position: center;
-            background-attachment: fixed; /* Эффект параллакса */
+            /* Убрал background-attachment: fixed для мобильных (вызывает баги на iOS) */
             color: var(--text-white);
             display: flex;
             align-items: center;
@@ -764,45 +763,67 @@
             .schedule-image { height: 300px; position: static; }
         }
 
+        @media (min-width: 769px) {
+            .hero {
+                background-attachment: fixed; /* Эффект параллакса только для десктопов */
+            }
+        }
+
         @media (max-width: 768px) {
-            header { justify-content: center; flex-direction: column; gap: 15px; text-align: center; }
-            .header-contacts { flex-direction: column; gap: 10px; }
+            header { justify-content: space-between; flex-direction: row; gap: 15px; text-align: left; padding: 15px 20px; }
+            .header-contacts { display: none; /* Скрываем контакты в шапке на мобилках как на основном сайте */ }
+            .header-logo { max-width: 120px; }
             
-            .hero { margin: 0; border-radius: 0; min-height: 70vh; }
-            .hero-content { padding: 40px 20px; }
-            .hero h1 { font-size: 2.5rem; }
+            .hero { margin: 0; border-radius: 0; min-height: 100vh; padding-top: 80px; align-items: flex-start;}
+            .hero-content { padding: 40px 20px; max-width: 100%; margin-top: 10vh;}
+            .hero h1 { font-size: 2.2rem; line-height: 1.1; margin-bottom: 20px;}
+            .hero p { font-size: 1.1rem; margin-bottom: 30px;}
+            .btn { width: 100%; box-sizing: border-box; } /* Кнопки на всю ширину на мобилках */
             
-            .general-description h2 { font-size: 2rem; }
+            .general-description h2 { font-size: 1.8rem; line-height: 1.2; }
+            .general-description p { font-size: 1rem; }
             
-            .image-text-block { flex-direction: column; padding: 30px 20px; gap: 30px; margin-bottom: 60px; }
-            .image-text-image { height: auto; min-height: 250px; width: 100%; }
-            .image-text-block h2 { font-size: 2rem; }
+            .image-text-block { flex-direction: column; padding: 0; gap: 20px; margin-bottom: 60px; box-shadow: none; background: transparent; }
+            .image-text-image { height: 300px; width: 100%; border-radius: 20px;}
+            .image-text-block::before { display: none; }
+            .image-text-block h2 { font-size: 1.8rem; line-height: 1.2;}
+            .image-text-block p { font-size: 1rem; }
             
-            .features { grid-template-columns: 1fr; gap: 20px; margin-bottom: 60px; }
-            .feature-card { padding: 30px 20px; }
+            .features { grid-template-columns: 1fr; gap: 15px; margin-bottom: 60px; }
+            .feature-card { padding: 30px 25px; border-radius: 20px;}
+            .feature-card h4 { font-size: 1.3rem;}
+            .feature-card p { font-size: 1rem;}
             
-            .schedule-header h2 { font-size: 2rem; }
-            .schedule-container { padding: 30px 20px; gap: 30px; }
+            .schedule-header h2 { font-size: 1.8rem; line-height: 1.2; }
+            .schedule-container { padding: 0; gap: 30px; background: transparent; box-shadow: none; }
             .schedule-timeline { padding: 0; }
-            .time-block { margin-bottom: 30px; }
-            .time-block h4 { font-size: 1.1rem; }
+            .schedule-image { height: 300px; border-radius: 20px; }
+            .time-block { margin-bottom: 25px; padding-left: 20px;}
+            .time-block.meal { padding: 15px 20px; }
+            .time-block h4 { font-size: 1.2rem; }
+            .time-block p { font-size: 1rem; }
             
             .included-section { padding: 40px 20px; margin-top: 40px; border-radius: 20px; }
-            .included-header h2 { font-size: 2rem !important; }
-            .included-list { grid-template-columns: 1fr; gap: 15px; }
-            .included-list li { padding: 20px 20px 20px 60px; font-size: 1rem; }
-            .included-list li::before { left: 15px; width: 25px; height: 25px; font-size: 14px; }
+            .included-header h2 { font-size: 1.8rem !important; line-height: 1.2;}
+            .included-list { grid-template-columns: 1fr; gap: 10px; }
+            .included-list li { padding: 20px 20px 20px 50px; font-size: 1rem; border-radius: 15px; }
+            .included-list li::before { left: 15px; width: 22px; height: 22px; font-size: 12px; }
             
-            .prices-section { padding: 40px 0; margin: 40px auto; }
+            .prices-section { padding: 20px 0; margin: 40px auto; }
             .discounts-block { grid-template-columns: 1fr; gap: 30px; padding: 30px 20px; border-radius: 20px; }
-            .prices-header h2 { font-size: 2.2rem; }
-            .prices-grid { grid-template-columns: 1fr; gap: 20px; }
+            .prices-header h2 { font-size: 1.8rem; line-height: 1.2;}
+            .prices-grid { grid-template-columns: 1fr; gap: 15px; }
+            .price-card { padding: 30px 20px; border-radius: 20px;}
+            .price-amount { font-size: 2.5rem; }
             
             .cta-section { margin: 40px 0 0; border-radius: 0; padding: 60px 20px; }
-            .cta-section h2 { font-size: 2.2rem; }
+            .cta-section h2 { font-size: 1.8rem; line-height: 1.2;}
+            .cta-section p { font-size: 1rem; }
             
-            .section-padding { padding: 60px 0; }
-            #schedule.section-padding, #prices.section-padding { margin-top: 60px !important; }
+            .section-padding { padding: 50px 0; }
+            #schedule.section-padding, #prices.section-padding { margin-top: 50px !important; }
+            
+            .kicker { font-size: 0.75rem; padding: 5px 12px; margin-bottom: 15px;}
         }
     </style>
 </head>
