@@ -424,13 +424,14 @@
             border-radius: 40px;
             padding: 60px;
             box-shadow: 0 20px 60px rgba(71, 65, 59, 0.04);
+            align-items: flex-start; /* Важно: чтобы контейнер не растягивал дочерние элементы */
         }
 
         .schedule-image {
             flex: 1;
             position: sticky;
-            top: 100px;
-            align-self: flex-start; /* Чтобы sticky работал корректно с длинной колонкой */
+            top: 100px; /* Отступ сверху при залипании */
+            align-self: flex-start; /* Чтобы sticky работал корректно */
         }
         
         .schedule-image img {
@@ -438,7 +439,8 @@
             height: 600px;
             border-radius: 24px;
             object-fit: cover;
-            margin-bottom: 0; /* Убираем margin, чтобы кнопка не была привязана к картинке жестко */
+            margin-bottom: 0;
+            display: block; /* Убирает лишние отступы снизу */
         }
 
         .schedule-timeline {
@@ -776,7 +778,7 @@
 
         @media (max-width: 992px) {
             .features { grid-template-columns: repeat(2, 1fr); }
-            .schedule-container { flex-direction: column; }
+            .schedule-container { flex-direction: column; align-items: stretch; }
             .schedule-image { position: static; }
             .schedule-image img { height: 300px; margin-bottom: 0;}
         }
@@ -952,14 +954,17 @@
 
         @media (max-width: 768px) {
             html { font-size: 13.5px; } /* Увеличили масштаб */
-            .container { padding: 0 25px; } /* Увеличили отступы от краев экрана */
             
-            header { justify-content: space-between; flex-direction: row; gap: 15px; text-align: left; padding: 15px 25px; }
+            /* Увеличиваем отступы от краев для всех блоков */
+            body { padding: 0 10px; box-sizing: border-box; }
+            .container { padding: 0 15px; } 
+            
+            header { justify-content: space-between; flex-direction: row; gap: 15px; text-align: left; padding: 15px 20px; border-radius: 20px; margin-top: 10px; }
             .header-contacts { display: none; }
             .header-logo { max-width: 110px; }
             
-            .hero { margin: 0; border-radius: 0; min-height: 100vh; padding-top: 60px; align-items: flex-start;}
-            .hero-content { padding: 30px 25px; max-width: 100%; margin-top: 5vh;}
+            .hero { margin: 15px 0 40px; border-radius: 30px; min-height: 85vh; padding-top: 40px; align-items: flex-start;}
+            .hero-content { padding: 30px 20px; max-width: 100%; margin-top: 2vh;}
             .hero h1 { font-size: 2.2rem; line-height: 1.1; margin-bottom: 20px;}
             .hero p { font-size: 1.1rem; margin-bottom: 30px;}
             .btn { width: 100%; box-sizing: border-box; padding: 15px 20px !important; font-size: 1rem !important;}
@@ -1006,7 +1011,7 @@
             .price-amount { font-size: 2.2rem; }
             .price-box { padding: 20px 20px; }
             
-            .cta-section { margin: 40px 0 0; border-radius: 0; padding: 50px 25px; }
+            .cta-section { margin: 40px 0; border-radius: 30px; padding: 50px 20px; }
             .cta-section h2 { font-size: 1.8rem; line-height: 1.2;}
             .cta-section p { font-size: 1rem; }
             
