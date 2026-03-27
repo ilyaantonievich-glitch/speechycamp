@@ -1006,8 +1006,9 @@
             .prices-section { padding: 20px 0; margin: 40px auto; }
             .discounts-block { grid-template-columns: 1fr; gap: 20px; padding: 25px 25px; border-radius: 20px; }
             .prices-header h2 { font-size: 1.8rem; line-height: 1.2;}
-            .prices-grid { grid-template-columns: 1fr; gap: 15px; }
-            .price-card { padding: 25px 25px; border-radius: 20px;}
+            .prices-grid { grid-template-columns: 1fr; gap: 20px; }
+            .price-card { padding: 25px 20px; border-radius: 20px;}
+            .price-card.popular::before { right: -5px; top: -10px; transform: rotate(3deg); font-size: 0.8rem; padding: 6px 15px;}
             .price-amount { font-size: 2.2rem; }
             .price-box { padding: 20px 20px; }
             
@@ -1353,7 +1354,7 @@
         <div class="popup-body" style="text-align: center;">
             <span class="kicker">01.06 - 12.06</span>
             <h3 style="margin-bottom: 20px;">Смена 1:<br><span style="color: var(--accent-orange);">«Лаборатория личности»</span></h3>
-            <p style="font-size: 1.1rem; color: var(--text-muted); font-weight: 500; margin-bottom: 30px;">2 недели (10 дней)</p>
+            <p style="font-size: 1.1rem; color: var(--text-muted); font-weight: 500; margin-bottom: 30px;">2 недели</p>
             <div style="text-align: left; background: var(--bg-main); padding: 30px; border-radius: 20px; margin-bottom: 30px;">
                 <p style="margin-top: 0; line-height: 1.6;">В этой смене мы с ребятами будем исследовать свой характер и эмоции. Создадим маску двух сторон личности, узнаем кто такие интроверты и экстраверты. Нас ждут увлекательные выезды, включая Музей Эрнста Неизвестного и парк попугаев!</p>
             </div>
@@ -1368,7 +1369,7 @@
         <div class="popup-body" style="text-align: center;">
             <span class="kicker">15.06 - 26.06</span>
             <h3 style="margin-bottom: 20px;">Смена 2:<br><span style="color: var(--accent-orange);">«Секреты настроения»</span></h3>
-            <p style="font-size: 1.1rem; color: var(--text-muted); font-weight: 500; margin-bottom: 30px;">2 недели (10 дней)</p>
+            <p style="font-size: 1.1rem; color: var(--text-muted); font-weight: 500; margin-bottom: 30px;">2 недели</p>
             <div style="text-align: left; background: var(--bg-main); padding: 30px; border-radius: 20px; margin-bottom: 30px;">
                 <p style="margin-top: 0; line-height: 1.6;">Короткая, но насыщенная смена для тех, кто хочет познакомиться с эмоциональным интеллектом. Практические занятия, ежедневный английский и выезды помогут ребенку лучше понять свои настроения и чувства.</p>
             </div>
@@ -1383,7 +1384,7 @@
         <div class="popup-body" style="text-align: center;">
             <span class="kicker">06.07 - 17.07</span>
             <h3 style="margin-bottom: 20px;">Смена 3:<br><span style="color: var(--accent-orange);">«Космическое лето»</span></h3>
-            <p style="font-size: 1.1rem; color: var(--text-muted); font-weight: 500; margin-bottom: 30px;">2 недели (10 дней)</p>
+            <p style="font-size: 1.1rem; color: var(--text-muted); font-weight: 500; margin-bottom: 30px;">2 недели</p>
             <div style="text-align: left; background: var(--bg-main); padding: 30px; border-radius: 20px; margin-bottom: 30px;">
                 <p style="margin-top: 0; line-height: 1.6;">Заключительная смена лета! Откройте вселенную внутри себя. Мы будем исследовать стихии, характеры и эмоции, используя английский язык как инструмент для общения и самовыражения.</p>
             </div>
@@ -1421,15 +1422,17 @@
 
 <script src="https://unpkg.com/@studio-freight/lenis@1.0.39/dist/lenis.min.js"></script>
 <script>
-    // Popup logic for main program
+    // Popup logic for main program (removed button earlier, but keeping logic just in case)
     const popup = document.getElementById('program-popup');
     const openBtn = document.getElementById('open-program-popup');
     const closeBtn = document.getElementById('close-popup');
 
-    openBtn.addEventListener('click', () => {
-        popup.classList.add('active');
-        lenis.stop(); // Полностью останавливаем Lenis, пока открыт попап
-    });
+    if (openBtn) {
+        openBtn.addEventListener('click', () => {
+            popup.classList.add('active');
+            lenis.stop(); // Полностью останавливаем Lenis, пока открыт попап
+        });
+    }
 
     closeBtn.addEventListener('click', () => {
         popup.classList.remove('active');
