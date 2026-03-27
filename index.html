@@ -43,6 +43,7 @@
             line-height: 1.6;
             -webkit-font-smoothing: antialiased;
             overflow-x: hidden;
+            font-size: 16px; /* Задаем явный базовый размер шрифта для десктопа */
         }
 
         /* --- Утилиты --- */
@@ -938,7 +939,7 @@
         .popup-content::-webkit-scrollbar-thumb:hover { background: rgba(0,0,0,0.2); }
 
         @media (max-width: 768px) {
-            html { font-size: 14px; } /* Уменьшаем базовый шрифт для мобильных */
+            html { font-size: 12px; } /* Делаем масштаб сайта еще меньше для мобильных */
             .container { padding: 0 15px; } /* Делаем отступы по краям чуть меньше */
             
             header { justify-content: space-between; flex-direction: row; gap: 15px; text-align: left; padding: 15px; }
