@@ -1180,7 +1180,7 @@
     </div>
     
     <div style="text-align: center; margin-top: 40px;">
-        <button class="btn btn-orange" id="open-program-popup" style="display: inline-block;">Подробная программа по дням</button>
+        <!-- Кнопку подробной программы убрали, так как информация перенесена в смены -->
     </div>
 
     <!-- Даты смен -->
@@ -1191,15 +1191,13 @@
             <div style="background: var(--bg-white); border-radius: 30px; padding: 40px; box-shadow: 0 10px 40px rgba(71, 65, 59, 0.03); border: 1px solid rgba(71, 65, 59, 0.05);">
                 <div style="color: var(--accent-orange); font-weight: 800; font-size: 1.1rem; margin-bottom: 10px;">Смена 1</div>
                 <div style="font-size: 1.5rem; font-weight: 800; margin-bottom: 5px;">[01.06-12.06]</div>
-                <div style="font-size: 1.05rem; color: var(--text-muted); font-weight: 500; margin-bottom: 15px;">5 или 10 дней на выбор</div>
                 <div style="font-size: 1.2rem; color: var(--text-main); font-weight: 700; margin-bottom: 25px;">«Лаборатория личности»</div>
                 <button class="open-shift-popup" data-shift="1" style="background: none; border: none; cursor: pointer; color: var(--btn-green); font-weight: 700; font-size: 1rem; text-decoration: none; border-bottom: 2px solid var(--btn-green-light); padding: 0 0 2px 0; font-family: inherit;">Подробнее</button>
             </div>
             
             <div style="background: var(--bg-white); border-radius: 30px; padding: 40px; box-shadow: 0 10px 40px rgba(71, 65, 59, 0.03); border: 1px solid rgba(71, 65, 59, 0.05);">
                 <div style="color: var(--accent-orange); font-weight: 800; font-size: 1.1rem; margin-bottom: 10px;">Смена 2</div>
-                <div style="font-size: 1.5rem; font-weight: 800; margin-bottom: 5px;">[22.06-26.06]</div>
-                <div style="font-size: 1.05rem; color: var(--text-muted); font-weight: 500; margin-bottom: 15px;">5 дней</div>
+                <div style="font-size: 1.5rem; font-weight: 800; margin-bottom: 5px;">[15.06-26.06]</div>
                 <div style="font-size: 1.2rem; color: var(--text-main); font-weight: 700; margin-bottom: 25px;">«Секреты настроения»</div>
                 <button class="open-shift-popup" data-shift="2" style="background: none; border: none; cursor: pointer; color: var(--btn-green); font-weight: 700; font-size: 1rem; text-decoration: none; border-bottom: 2px solid var(--btn-green-light); padding: 0 0 2px 0; font-family: inherit;">Подробнее</button>
             </div>
@@ -1207,7 +1205,6 @@
             <div style="background: var(--bg-white); border-radius: 30px; padding: 40px; box-shadow: 0 10px 40px rgba(71, 65, 59, 0.03); border: 1px solid rgba(71, 65, 59, 0.05);">
                 <div style="color: var(--accent-orange); font-weight: 800; font-size: 1.1rem; margin-bottom: 10px;">Смена 3</div>
                 <div style="font-size: 1.5rem; font-weight: 800; margin-bottom: 5px;">[06.07-17.07]</div>
-                <div style="font-size: 1.05rem; color: var(--text-muted); font-weight: 500; margin-bottom: 15px;">5 или 10 дней на выбор</div>
                 <div style="font-size: 1.2rem; color: var(--text-main); font-weight: 700; margin-bottom: 25px;">«Космическое лето»</div>
                 <button class="open-shift-popup" data-shift="3" style="background: none; border: none; cursor: pointer; color: var(--btn-green); font-weight: 700; font-size: 1rem; text-decoration: none; border-bottom: 2px solid var(--btn-green-light); padding: 0 0 2px 0; font-family: inherit;">Подробнее</button>
             </div>
@@ -1240,6 +1237,7 @@
         <div class="prices-header">
             <span class="kicker">Инвестиция в будущее</span>
             <h2>Стоимость смены</h2>
+            <p style="color: var(--text-muted); font-size: 1.1rem; margin-top: 10px; font-weight: 600;">Данная цена действительна до 15 апреля</p>
         </div>
 
         <div class="prices-grid">
@@ -1285,7 +1283,7 @@
                 <p style="color: var(--text-main); font-weight: 600; margin: 0; font-size: 1.05rem; background: var(--btn-green-light); padding: 15px 20px; border-radius: 15px; border-left: 4px solid var(--btn-green);">Максимальный результат и самая выгодная цена.</p>
             </div>
             <div style="grid-column: 1 / -1; text-align: center; margin-top: 10px;">
-                <p style="font-size: 1.1rem; color: var(--text-main); font-weight: 500; margin: 0 auto 20px auto; padding: 15px 30px; background: var(--btn-green-light); border-radius: 15px; display: inline-block;">Можно прийти на одну неделю или остаться на две со скидкой 4 900 руб.</p>
+                <p style="font-size: 1.1rem; color: var(--text-main); font-weight: 500; margin: 0 auto 20px auto; padding: 15px 30px; background: var(--btn-green-light); border-radius: 15px; display: inline-block;">Можно прийти на одну неделю или остаться на две со скидкой 3 900 руб.</p>
                 <div>
                     <a href="#contacts" class="btn btn-orange" style="padding: 18px 40px; font-size: 1.1rem;">Забронировать место</a>
                 </div>
@@ -1350,7 +1348,7 @@
         <div class="popup-body" style="text-align: center;">
             <span class="kicker">01.06 - 12.06</span>
             <h3 style="margin-bottom: 20px;">Смена 1:<br><span style="color: var(--accent-orange);">«Лаборатория личности»</span></h3>
-            <p style="font-size: 1.1rem; color: var(--text-muted); font-weight: 500; margin-bottom: 30px;">5 или 10 дней на выбор</p>
+            <p style="font-size: 1.1rem; color: var(--text-muted); font-weight: 500; margin-bottom: 30px;">2 недели (10 дней)</p>
             <div style="text-align: left; background: var(--bg-main); padding: 30px; border-radius: 20px; margin-bottom: 30px;">
                 <p style="margin-top: 0; line-height: 1.6;">В этой смене мы с ребятами будем исследовать свой характер и эмоции. Создадим маску двух сторон личности, узнаем кто такие интроверты и экстраверты. Нас ждут увлекательные выезды, включая Музей Эрнста Неизвестного и парк попугаев!</p>
             </div>
@@ -1363,9 +1361,9 @@
     <div class="popup-content" data-lenis-prevent>
         <button class="popup-close" onclick="closeShiftPopup(2)">×</button>
         <div class="popup-body" style="text-align: center;">
-            <span class="kicker">22.06 - 26.06</span>
+            <span class="kicker">15.06 - 26.06</span>
             <h3 style="margin-bottom: 20px;">Смена 2:<br><span style="color: var(--accent-orange);">«Секреты настроения»</span></h3>
-            <p style="font-size: 1.1rem; color: var(--text-muted); font-weight: 500; margin-bottom: 30px;">Только 5 дней погружения</p>
+            <p style="font-size: 1.1rem; color: var(--text-muted); font-weight: 500; margin-bottom: 30px;">2 недели (10 дней)</p>
             <div style="text-align: left; background: var(--bg-main); padding: 30px; border-radius: 20px; margin-bottom: 30px;">
                 <p style="margin-top: 0; line-height: 1.6;">Короткая, но насыщенная смена для тех, кто хочет познакомиться с эмоциональным интеллектом. Практические занятия, ежедневный английский и выезды помогут ребенку лучше понять свои настроения и чувства.</p>
             </div>
@@ -1380,7 +1378,7 @@
         <div class="popup-body" style="text-align: center;">
             <span class="kicker">06.07 - 17.07</span>
             <h3 style="margin-bottom: 20px;">Смена 3:<br><span style="color: var(--accent-orange);">«Космическое лето»</span></h3>
-            <p style="font-size: 1.1rem; color: var(--text-muted); font-weight: 500; margin-bottom: 30px;">5 или 10 дней на выбор</p>
+            <p style="font-size: 1.1rem; color: var(--text-muted); font-weight: 500; margin-bottom: 30px;">2 недели (10 дней)</p>
             <div style="text-align: left; background: var(--bg-main); padding: 30px; border-radius: 20px; margin-bottom: 30px;">
                 <p style="margin-top: 0; line-height: 1.6;">Заключительная смена лета! Откройте вселенную внутри себя. Мы будем исследовать стихии, характеры и эмоции, используя английский язык как инструмент для общения и самовыражения.</p>
             </div>
