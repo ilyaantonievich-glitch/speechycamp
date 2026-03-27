@@ -548,22 +548,25 @@
         .price-card.popular {
             border: 1px solid rgba(71, 65, 59, 0.05);
             background: var(--bg-white);
+            position: relative;
         }
 
         .price-card.popular::before {
-            content: 'Выгоднее';
+            content: 'Выгода 3900₽';
             position: absolute;
             top: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--accent-orange);
+            right: -15px;
+            background: var(--btn-green);
             color: white;
-            padding: 5px 20px;
+            padding: 8px 24px;
             border-radius: 20px;
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(122, 184, 97, 0.4);
+            transform: rotate(5deg);
+            z-index: 10;
         }
 
         .price-title {
@@ -1250,7 +1253,7 @@
             <div class="price-card popular">
                 <div class="price-box">
                     <div class="price-title">2 недели (10 дней)</div>
-                    <div class="price-amount">22 900</div>
+                    <div class="price-amount">23 900</div>
                     <div class="price-currency">рублей</div>
                 </div>
             </div>
