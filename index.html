@@ -418,17 +418,17 @@
 
         .schedule-image {
             flex: 1;
-            border-radius: 24px;
-            overflow: hidden;
             position: sticky;
             top: 100px;
-            height: 600px;
+            align-self: flex-start; /* Чтобы sticky работал корректно с длинной колонкой */
         }
         
         .schedule-image img {
             width: 100%;
-            height: 100%;
+            height: 600px;
+            border-radius: 24px;
             object-fit: cover;
+            margin-bottom: 0; /* Убираем margin, чтобы кнопка не была привязана к картинке жестко */
         }
 
         .schedule-timeline {
@@ -753,7 +753,8 @@
         @media (max-width: 992px) {
             .features { grid-template-columns: repeat(2, 1fr); }
             .schedule-container { flex-direction: column; }
-            .schedule-image { height: 300px; position: static; }
+            .schedule-image { position: static; }
+            .schedule-image img { height: 300px; margin-bottom: 0;}
         }
 
         @media (min-width: 769px) {
@@ -761,6 +762,110 @@
                 background-attachment: fixed; /* Эффект параллакса только для десктопов */
             }
         }
+
+        /* --- Popup Styles --- */
+        .popup-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(43, 39, 35, 0.8);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            display: none;
+            justify-content: center;
+            align-items: center; /* Возвращаем по центру */
+            padding: 20px; 
+            opacity: 0;
+            transition: opacity 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .popup-overlay.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .popup-content {
+            background: var(--bg-white);
+            border-radius: 30px;
+            padding: 50px;
+            max-width: 800px;
+            width: 100%;
+            max-height: 90vh; /* Возвращаем ограничение по высоте для карточки */
+            overflow-y: auto; /* Включаем прокрутку ВНУТРИ карточки */
+            position: relative;
+            transform: translateY(20px);
+            transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+            margin: auto;
+            /* Хак для iOS Safari, чтобы работал внутренний скролл: */
+            -webkit-overflow-scrolling: touch; 
+            scroll-behavior: smooth; /* Плавный скролл внутри элемента */
+            overscroll-behavior: contain; /* Предотвращает дергание родительской страницы */
+            will-change: transform; /* Подсказка браузеру для аппаратного ускорения */
+        }
+
+        .popup-overlay.active .popup-content {
+            transform: translateY(0);
+        }
+
+        .popup-close {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            width: 40px;
+            height: 40px;
+            background: var(--bg-main);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border: none;
+            font-size: 20px;
+            color: var(--text-main);
+            transition: all 0.2s ease;
+        }
+
+        .popup-close:hover {
+            background: var(--accent-orange-light);
+            color: var(--accent-orange);
+            transform: rotate(90deg);
+        }
+
+        .popup-body h3 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: var(--text-main);
+        }
+
+        .popup-body h4 {
+            font-size: 1.3rem;
+            color: var(--accent-orange);
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+
+        .popup-body ul {
+            padding-left: 20px;
+            margin-bottom: 20px;
+        }
+
+        .popup-body li {
+            margin-bottom: 10px;
+            color: var(--text-muted);
+        }
+
+        .day-block {
+            background: var(--bg-main);
+            padding: 25px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+        }
+
+        /* --- Custom Scrollbar for Popup --- */
+        .popup-content::-webkit-scrollbar { width: 8px; }
+        .popup-content::-webkit-scrollbar-track { background: transparent; }
+        .popup-content::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.1); border-radius: 10px; }
+        .popup-content::-webkit-scrollbar-thumb:hover { background: rgba(0,0,0,0.2); }
 
         @media (max-width: 768px) {
             header { justify-content: space-between; flex-direction: row; gap: 15px; text-align: left; padding: 15px 20px; }
@@ -790,7 +895,8 @@
             .schedule-header h2 { font-size: 1.8rem; line-height: 1.2; }
             .schedule-container { padding: 0; gap: 30px; background: transparent; box-shadow: none; }
             .schedule-timeline { padding: 0; }
-            .schedule-image { height: 300px; border-radius: 20px; }
+            .schedule-image { border-radius: 20px; }
+            .schedule-image img { height: 300px; margin-bottom: 0;}
             .time-block { margin-bottom: 25px; padding-left: 20px;}
             .time-block.meal { padding: 15px 20px; }
             .time-block h4 { font-size: 1.2rem; }
@@ -817,6 +923,19 @@
             #schedule.section-padding, #prices.section-padding { margin-top: 50px !important; }
             
             .kicker { font-size: 0.75rem; padding: 5px 12px; margin-bottom: 15px;}
+            .popup-overlay { padding: 15px; } /* Отступы по бокам на телефоне */
+            .popup-content { 
+                padding: 30px 20px; 
+                border-radius: 20px; 
+                max-height: 85vh; /* Чуть меньше высоты экрана, чтобы было видно, что это модальное окно */
+                /* Немного уменьшаем масштаб текста внутри попапа для мобилок: */
+                font-size: 0.95rem; 
+            }
+            .popup-close { top: 15px; right: 15px; width: 35px; height: 35px; font-size: 24px; }
+            .popup-body h3 { font-size: 1.4rem; margin-bottom: 10px; padding-right: 30px; } /* Отступ для крестика */
+            .popup-body h4 { font-size: 1.1rem; }
+            .popup-body p { margin-bottom: 15px; }
+            .day-block { padding: 20px 15px; }
         }
     </style>
 </head>
@@ -967,6 +1086,10 @@
             </div>
         </div>
     </div>
+    
+    <div style="text-align: center; margin-top: 40px;">
+        <button class="btn btn-orange" id="open-program-popup" style="display: inline-block;">Подробная программа по дням</button>
+    </div>
 
     <div class="included-section">
         <div class="included-header">
@@ -998,16 +1121,30 @@
 
         <div class="prices-grid">
             <div class="price-card">
-                <div class="price-title">1 смена</div>
+                <div class="price-title">1 неделя (5 дней)</div>
                 <div class="price-amount">13 900</div>
                 <div class="price-currency">рублей</div>
-                <div class="price-save"></div>
+                <div class="price-save">Полноценная программа с погружением</div>
             </div>
             <div class="price-card popular">
-                <div class="price-title">2 смены</div>
+                <div class="price-title">2 недели (10 дней)</div>
                 <div class="price-amount">22 900</div>
                 <div class="price-currency">рублей</div>
-                <div class="price-save">Экономия 4 900 руб</div>
+                <div class="price-save">Экономия 4 900 руб<br>Полный цикл программы</div>
+            </div>
+        </div>
+
+        <div class="prices-explanation" style="max-width: 800px; margin: 0 auto 40px; background: var(--bg-white); padding: 40px; border-radius: 30px; border: 1px solid rgba(71, 65, 59, 0.05); box-shadow: 0 10px 40px rgba(71, 65, 59, 0.04);">
+            <h3 style="font-size: 1.5rem; margin-bottom: 20px; color: var(--text-main); text-align: center;">Как выбрать длительность?</h3>
+            <div style="display: grid; gap: 20px;">
+                <div>
+                    <h4 style="color: var(--accent-orange); margin-bottom: 10px;">1 неделя</h4>
+                    <p style="color: var(--text-muted); margin: 0;">Это полноценная самостоятельная программа. Ребенок успеет познакомиться с основными концепциями, подтянуть язык и найти новых друзей.</p>
+                </div>
+                <div>
+                    <h4 style="color: var(--accent-orange); margin-bottom: 10px;">2 недели</h4>
+                    <p style="color: var(--text-muted); margin: 0;">Полный цикл программы. Максимальный результат: ребенок не только узнает о своих эмоциях, но и научится ими управлять, а также значительно улучшит разговорный английский.</p>
+                </div>
             </div>
         </div>
 
@@ -1026,6 +1163,11 @@
                     <li><span class="discount-value">-1000 ₽</span> <span>при покупке от двух смен</span></li>
                 </ul>
             </div>
+        </div>
+        
+        <div class="booking-motivation" style="text-align: center; margin-top: 40px; padding: 30px; background: var(--accent-orange-light); border-radius: 20px;">
+            <h4 style="color: var(--accent-orange); margin-bottom: 10px; font-size: 1.3rem;">Бронируйте заранее — это выгодно!</h4>
+            <p style="color: var(--text-main); margin-bottom: 0; font-weight: 500;">Чем раньше вы бронируете, тем выгоднее цена. Количество мест строго ограничено, чтобы мы могли уделить максимум внимания каждому ребенку.</p>
         </div>
         
         <p class="prepayment-note">Бронирование места производится по предварительной оплате 50%</p>
@@ -1057,8 +1199,87 @@
     <p>г. Екатеринбург, ул. Данилина, 10</p>
 </footer>
 
+<!-- Popup HTML -->
+<div class="popup-overlay" id="program-popup">
+    <div class="popup-content" data-lenis-prevent>
+        <button class="popup-close" id="close-popup">×</button>
+        <div class="popup-body">
+            <h3>Космическая лаборатория: код личности</h3>
+            <p style="color: var(--text-muted); font-size: 1.1rem; margin-bottom: 30px;">Программа первого дня. Каждый следующий день посвящен новой теме.</p>
+            
+            <div class="day-block">
+                <h4>День 1 — Солнце и Луна: четыре стихии, знаки зодиака и характер</h4>
+                
+                <p><strong>09:00 – 09:15 / Зарядка на английском</strong><br>
+                Не просто разминка, а пробуждение планет! Делаем под бодрую музыку.</p>
+                
+                <p><strong>09:15 – 10:30 / Исследование «Солнце и Луна»</strong></p>
+                <ul>
+                    <li><strong>Солнце – это Я!</strong> (Наша личность). Изучаем 4 стихии (Огонь, Земля, Воздух, Вода).</li>
+                    <li><strong>Луна – это мое настроение</strong> (Наши эмоции). Как мы управляем эмоциями и наша чувствительность.</li>
+                    <li><strong>Маска</strong> - то, как нас видят окружающие (Асцендент).</li>
+                    <li><strong>Творческое задание:</strong> Создание маски своей личности (внешняя и внутренняя сторона).</li>
+                </ul>
+                
+                <p><strong>10:30 – 11:00 / Завтрак</strong></p>
+                
+                <p><strong>11:00 – 12:00 / Урок английского языка</strong><br>
+                Закрепляем тему лексически: Sun, Moon, Star, Planet. Учимся говорить о себе и своих чувствах (I am..., I feel...). Играем в «Zodiac Race» / «Захвати планету».</p>
+                
+                <p><strong>12:00 – 13:00 / Свободное время</strong><br>
+                Творческие поделки: раскрашиваем свой знак зодиака.</p>
+                
+                <p><strong>13:00 – 13:30 / Обед</strong></p>
+                
+                <p><strong>13:30 – 15:00 / Прогулка в парке: Игры про Солнце и Луну</strong></p>
+                <ul>
+                    <li>"Sun and Moon" (прятки наоборот)</li>
+                    <li>"Day and Night" (активность и замирание)</li>
+                    <li>"Найди свою стихию"</li>
+                </ul>
+                
+                <p><strong>15:00 – 17:00 / Активность в школе + перекус в 16:00</strong><br>
+                Настольные игры (Чужая планета, Звездные художники, Among Us) или просмотр тематического фильма с обсуждением.</p>
+            </div>
+            
+            <h4 style="text-align: center; margin-top: 30px;">Итог Дня 1:</h4>
+            <ul style="max-width: 500px; margin: 0 auto; background: var(--bg-white); padding: 20px 20px 20px 40px; border-radius: 15px;">
+                <li>Дети узнали: Солнце = характер, Луна = эмоции.</li>
+                <li>Узнали свой знак зодиака и стихию.</li>
+                <li>Выучили 10+ новых слов на английском.</li>
+                <li>Побегали в парке с пользой.</li>
+                <li>Создали маску своего “Я” и познакомились с интересными играми.</li>
+            </ul>
+            <div style="height: 40px;"></div> <!-- Отступ от низа -->
+        </div>
+    </div>
+</div>
+
 <script src="https://unpkg.com/@studio-freight/lenis@1.0.39/dist/lenis.min.js"></script>
 <script>
+    // Popup logic
+    const popup = document.getElementById('program-popup');
+    const openBtn = document.getElementById('open-program-popup');
+    const closeBtn = document.getElementById('close-popup');
+
+    openBtn.addEventListener('click', () => {
+        popup.classList.add('active');
+        lenis.stop(); // Полностью останавливаем Lenis, пока открыт попап
+    });
+
+    closeBtn.addEventListener('click', () => {
+        popup.classList.remove('active');
+        lenis.start(); // Запускаем Lenis обратно
+    });
+
+    popup.addEventListener('click', (e) => {
+        if (e.target === popup) {
+            popup.classList.remove('active');
+            lenis.start();
+        }
+    });
+
+    // Lenis scroll logic
     const lenis = new Lenis({
         duration: 1.2,
         easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
